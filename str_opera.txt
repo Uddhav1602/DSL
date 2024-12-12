@@ -1,0 +1,152 @@
+list=[]
+max_len = 0
+longest_word = ""
+current_word = ""
+
+
+def long_word():
+    global list
+    global max_len
+    global longest_word
+    global current_word
+    
+    l=input("Enter your string: ")
+    list.append(l)
+    for char in l + ' ':
+        if char != ' ':
+            current_word += char
+        else: 
+            if len(current_word)>max_len:
+             max_len = len(current_word)
+             longest_word = current_word
+            current_word = ""
+    
+    print(longest_word)
+    print(max_len)
+    
+def frq_occur():
+    global list
+    global current_word
+    count=0
+    a=input("Enter the character to search: ")
+    for string in list:
+        current_word=""
+        for char in string + ' ':
+            if char!= ' ':
+                current_word+=char
+            else:
+                if current_word==a:
+                    count+=1
+                current_word=""
+    
+    print(count)
+    
+
+def is_palindrome():
+    global list
+    a = input("Enter the word to check: ")
+    for string in list:  # Iterate through each string in the list
+        current_word = ""
+        for char in string + ' ':  # Add space to process the last word
+            if char != ' ':
+                current_word += char  # Build the word
+            else:
+                if current_word == a:  # Check if the word matches the input
+                    # Check if the word is a palindrome
+                    is_palindrome = True
+                    for i in range(len(current_word) // 2):
+                        if current_word[i] != current_word[len(current_word) - 1 - i]:
+                            is_palindrome = False
+                            break
+                    if is_palindrome:
+                        print(f"'{current_word}' is a palindrome.")
+                    else:
+                        print(f"'{current_word}' is not a palindrome.")
+                current_word = ""  # Reset for the next word
+                
+def first_appearance():
+    global list
+    substring = input("Enter the substring to search: ")
+    for string in list:
+        index = -1  # Default value if substring is not found
+        for i in range(len(string) - len(substring) + 1):  # Manually iterate over possible start points
+            match = True
+            for j in range(len(substring)):  # Compare characters one by one
+                if string[i + j] != substring[j]:
+                    match = False
+                    break
+            if match:  # If all characters match, record the index
+                index = i
+                break
+        if index != -1:
+            print(f"Substring '{substring}' first appears at index {index} in '{string}'.")
+        else:
+            print(f"Substring '{substring}' not found in '{string}'.")
+
+
+def word_count():
+    global list
+    words = []  # List to store unique words
+    counts = []  # List to store counts corresponding to the words
+    for string in list:
+        current_word = ""
+        for char in string + ' ':  # Add space to process the last word
+            if char != ' ':
+                current_word += char  # Build the word manually
+            else:
+                if current_word != "":
+                    # Check if the word is already recorded
+                    found = False
+                    for i in range(len(words)):
+                        if words[i] == current_word:
+                            counts[i] += 1  # Increment count
+                            found = True
+                            break
+                    if not found:
+                        words.append(current_word)  # Add new word
+                        counts.append(1)
+                    current_word = ""  # Reset for the next word
+    # Display word counts
+    for i in range(len(words)):
+        print(f"'{words[i]}': {counts[i]}")
+        
+          
+def main():
+    t=int(input("Enter the task to perform :"))
+    if t==1:
+        long_word()
+    elif t==2: 
+        frq_occur()
+    elif t==3:
+        is_palindrome()
+    elif t==4:
+        first_appearance()
+    elif t==5:
+        word_count()
+    else:
+        print("You have exited program...")
+        
+    c=input("Do you want to continue(Y/N) :").strip().lower()
+    if c=="y":
+        print(main())
+    elif c=="n":
+        print("program has ended...")
+    
+        
+main()
+             
+    
+
+
+
+
+
+
+
+
+'''Write a Python program to compute following operations on String: 
+a) To display word with the longest length 
+b) To determines the frequency of occurrence of particular character in the string 
+c) To check whether given string is palindrome or not  
+d) To display index of first appearance of the substring  
+e) To count the occurrences of each word in a given string'''

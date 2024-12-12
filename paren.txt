@@ -1,0 +1,40 @@
+#include<iostream>
+using namespace std;
+#define size 100
+
+bool isWellParenthesized(const string& expression){
+    char arr[size];
+    int top = -1;
+
+    for (char ch:expression){
+        if(ch == '(' || ch =='{' || ch == '['){
+            top++;
+            ch=arr[top];
+        }
+        else if(ch == ')' || ch == '}' || ch == ']'){
+            if(top==-1){
+                return false;
+            }
+            char topChar = arr[top--];
+            if ((ch == ')' && arr[top] != '(')||
+            (ch == '}' && arr[top] != '{')||
+            (ch == ']' && arr[top] != '[')){
+                return false;
+            }
+        }
+    }
+    return top == -1;
+}
+
+int main(){
+    string expression;
+    cout<<"Enter the expression :";
+    cin>>expression;
+
+    if(isWellParenthesized(expression)){
+        cout<<"Expression is well parenthesized"<<endl;
+    }
+    else{
+        cout<<"Expression is not well parenthesized"<<endl;
+    }
+}

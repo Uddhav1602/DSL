@@ -1,0 +1,62 @@
+A=[]
+
+def bubble_sort():
+    global A
+    n=int(input("Enter the number to input :"))
+    for k in range (n):
+        x=int(input(f"Enter number {k+1} :"))
+        A.append(x)
+        
+    i=n-1
+    for i in range (n):
+        while(i>=0):
+            for j in range (0,i):
+                if (A[j]>A[j+1]):
+                    A[j] , A[j+1] = A[j+1] , A[j]
+            i-=1
+    print(A)
+               
+def selectionSort() :
+    global A
+    n=int(input("Enter how many numbers to input :"))
+    for k in range (n):
+        x=int(input(f"Enter number {k+1} :"))
+        A.append(x)
+        
+    for i in range(n) :
+        min = i
+        j = i + 1
+        for j in range( i+1, n) :
+            if(A[j] < A[min]) :
+                min = j
+        if(min != i) :
+            A[i] , A[min] = A[min] , A[i]
+    print(A)
+ 
+def top5():
+    global A
+    
+    print("\nTop 5 Scores:")
+    # Print the top 5 scores (highest first)
+    for i in range(min(5, len(A))):
+        print(f"Rank {i + 1}: {A[-(i + 1)]:.2f}")
+
+                
+    
+def main():
+    t=int(input("Enter task to perform :"))
+    if t==1:
+        bubble_sort()
+    elif t==2:
+        selectionSort()
+    elif t==3:
+        top5()
+    else:
+        print("Task ended")        
+    d=input("Do you want to continue(Y/N) :").strip().lower()
+    if d=="y":
+        print(main())
+    elif d=="n":
+        print("task Ended")    
+    
+main()

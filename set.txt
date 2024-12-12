@@ -1,0 +1,81 @@
+c=[]
+b=[]
+f=[]
+
+n1=int(input("Enter the number of students who play cricket :"))
+for i in range (n1):
+    roll=int(input(f"Enter the {i+1} student roll no. :"))
+    if roll in c:
+        i+=1
+        pass
+    else:
+        c.append(roll)
+        i+=1
+        
+        
+n2=int(input("Enter the number of students who play badminton :"))
+for j in range (n2):
+    roll=int(input(f"Enter the {j+1} student roll no. :"))
+    if roll in b:
+        j+=1
+        pass
+    else:
+        b.append(roll)
+        j+=1
+        
+        
+n3=int(input("Enter the number of students who play football :"))
+for k in range (n3):
+    roll=int(input(f"Enter the {k+1} student roll no. :"))
+    if roll in f:
+        k+=1
+        pass
+    else:
+        f.append(roll)
+        k+=1
+        
+        
+print(c)
+print(b)
+print(f)
+        
+def union(x1,x2):
+    uni=[]
+    for i in x1:
+        uni.append(i)
+    for j in x2:
+        if j not in (uni):
+            uni.append(j)
+        
+    print(uni)
+
+def intersection(x1,x2):
+    inter=[]
+    for i in x1:
+        for j in x2:
+            if i==j:
+                inter.append(i)
+    print(inter)
+
+def difference(x1,x2):
+    diff=[]
+    for i in x1:
+        if i not in x2:
+            diff.append(i)
+            
+    print(diff)
+
+def main():
+    print("\nWelcome to menu")
+    t=int(input("Enter the  task to perform :"))
+    if t==1: 
+        union(c,b)
+    elif t==2:
+        intersection(c,f)
+    elif t==3:
+        difference(b,f)
+    else:
+        print("Program has exited....")
+        
+        
+main()

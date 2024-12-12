@@ -1,0 +1,88 @@
+A=[]
+
+def arr():
+    global A
+    x=int(input("Enter how many numbers to add :"))
+    for i in range (x):
+        a=int(input(f"Enter number {i+1}  :"))
+        A.append(a)
+        
+    print(A)
+    
+def binary_search():
+    key=int(input("Enter the key to search :"))
+    high=len(A)-1
+    low=0
+    while low<=high:
+        mid=(low+high)//2
+        
+        if key==A[mid]:
+            print(f"Element found at index :{mid}")
+            break
+        elif key<A[mid]:
+            high=mid-1
+        else:
+            low=mid+1
+    else:
+        print("key not found")
+    
+    
+def fibonacci_search():
+    n=len(A)
+    key=int(input("Enter the key to search :"))
+    
+    fib2=0
+    fib1=1
+    fib=fib1+fib2
+    
+    while fib<n:
+        fib2 = fib1
+        fib1 = fib
+        fib = fib1 + fib2
+        
+    offset = -1
+    
+    while fib > 1:
+        # Calculate the index to compare
+        i = min(offset + fib2, n - 1)
+
+        if A[i] == key:  # Key found
+            print(f"Element found at index {i}")
+            break
+        elif A[i] < key:  # Move to the right
+            fib = fib1
+            fib1 = fib2
+            fib2 = fib - fib1
+            offset = i
+        else:  # Move to the left
+            fib = fib2
+            fib1 = fib1 - fib2
+            fib2 = fib - fib1
+
+    # Check if the last element matches the key
+    if fib1 != 0:
+        if offset + 1 < n:
+            if A[offset + 1] == key:
+            # Perform the action if all conditions are true
+                return offset + 1
+
+    print(f"{key} Not Found")
+    
+
+def main():
+    arr()
+    t=int(input("Enter task to perform :"))
+    if t==1:
+        binary_search()
+    elif t==2:
+        fibonacci_search()
+    else:
+        print("Task ended")        
+    d=input("Do you want to continue(Y/N) :").strip().lower()
+    if d=="y":
+        print(main())
+    elif d=="n":
+        print("task Ended")    
+    
+main()
+    
